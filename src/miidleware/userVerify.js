@@ -8,7 +8,8 @@ const userVerify = async function (req, res, next) {
             return
         }
       let bearerHeader = token && token.split(' ')[1];
-        let decodeToken = jwt.verify(bearerHeader,"group1", { ignoreExpiration: true })
+        let decodeToken =  jwt.verify(bearerHeader,"group1", { ignoreExpiration: true })
+        console.log(decodeToken)
 
         let expire = decodeToken.exp
         let iat = Math.floor(Date.now() / 1000)

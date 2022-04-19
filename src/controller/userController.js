@@ -185,7 +185,7 @@ const userLogin = async function (req, res) {
         } else {
             let geneToken = jwt.sign({
                 userId: findUser._id,
-            }, "group1", { expiresIn: "30m" });
+            }, "group1", { expiresIn: "1hr" });
 
             let storeToken = { userId: findUser._id, geneToken: geneToken }
             return res.status(201).send({ status: true, msg: "token Created Successfully", Token: storeToken })

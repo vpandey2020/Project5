@@ -24,11 +24,9 @@ const validPassword = function (password) {
 };
 
 const isValidSizes = (availableSizes) => {
-    return ["S", "XS", "M", "X", "L", "XXL", "XL"].indexOf(availableSizes) != -1
+    return ["S", "XS", "M", "X", "L", "XXL", "XL"].indexOf(availableSizes) == -1
 
 }
-
-
 
 const isValid = function (value) {
     if (typeof value == undefined || value == null) return false
@@ -53,5 +51,6 @@ const isValidObjectId = function (objectId) {
     isValidObjectId,
     validPincode,
     isValidSizes
+    
   }
   

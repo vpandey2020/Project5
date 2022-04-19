@@ -5,6 +5,7 @@ const { default: mongoose } = require('mongoose');
 const app = express();
 const multer=require("multer")
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer().any())
