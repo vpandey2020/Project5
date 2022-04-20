@@ -202,7 +202,7 @@ let getUser = async function (req, res) {
     try {
         let userId = req.params.userId
         let geneToken = req.userId
-        //not working not found id
+        
         let validUser = await userModel.findOne({ _id: userId })
         if (!validUser) {
             return res.status(404).send({ status: false, msg: "UserId not found" })
@@ -211,7 +211,7 @@ let getUser = async function (req, res) {
             res.status(400).send({ status: false, message: "User id is not valid" })
             return
         }
-        //not working for valid id
+       
         if (!isValidObjectId(userId)) {
             return res.status(400).send({ status: false, message: "please provide a valid user id" })
         }
@@ -285,6 +285,7 @@ const updateUser = async function (req, res) {
         }
         var encryptedPassword = await bcrypt.hash(password, 10)
         if (profileImage && profileImage.length > 0) {
+
             var uploadedFileURL = await aws.uploadFiles(profileImage[0])
 
         } else {

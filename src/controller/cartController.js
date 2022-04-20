@@ -5,7 +5,8 @@ const productModel = require("../models/productModel")
 const cartModel = require("../models/cartModel")
 
 
-////-------------------------------------------------------------------------------------------------------------------
+//*************************createCart************************** */
+
 const createCart = async function (req, res) {
   try {
     let userId = req.params.userId;
@@ -15,10 +16,10 @@ const createCart = async function (req, res) {
         .status(400)
         .send({ status: false, message: "Please provide a valid userId" });
 
-        if (!validation.isValidRequestBody(req.body)) {
-          res.status(400).send({ status: false, message: "please provide data " })
-          return
-        }
+    if (!validation.isValidRequestBody(req.body)) {
+      res.status(400).send({ status: false, message: "please provide data " })
+      return
+    }
     // if (req.user.userId != userId)
     //   return res
     //     .status(401)
@@ -50,7 +51,7 @@ const createCart = async function (req, res) {
       items2 = isCartExist.items;
     }
     let findProduct = await productModel.findById(items[0].productId);
-   // console.log(findProduct.price);
+    // console.log(findProduct.price);
     // res.send(findProduct)
     let totalPrice2 = findProduct.price;
     let newquantity = items[0].quantity;
@@ -87,7 +88,8 @@ const createCart = async function (req, res) {
 };
 
 
-//********************************************************* */
+//**************************updateCart******************************* */
+
 const updateCart = async (req, res) => {
   try {
     let userId = req.params.userId
@@ -98,7 +100,7 @@ const updateCart = async (req, res) => {
         .send({ status: false, message: "Invalid userId in body" });
 
     let findUser = await userModel.findOne({ _id: req.params.userId });
-    
+
     if (!findUser)
       return res
         .status(400)
@@ -249,7 +251,7 @@ const updateCart = async (req, res) => {
     });
   }
 };
-//******************************************************************************** */
+//*************************************getFromCart******************************************* */
 
 const getFromCart = async (req, res) => {
   try {
@@ -294,8 +296,8 @@ const getFromCart = async (req, res) => {
         .status(404)
         .send({ status: false, message: "cart not found!! add some products" });
     }
-    
-    res.status(200).send({ status: true,message:"SUCCESS", data: cart });
+
+    res.status(200).send({ status: true, message: "SUCCESS", data: cart });
   } catch (error) {
     res.status(500).send({ status: false, message: error.message });
   }
@@ -349,7 +351,7 @@ const deleteCart = async (req, res) => {
         .send({ status: false, message: "cart not found!! add some products" });
     }
 
-    res.status(200).send({ status: true,message:"SUCCESS", data: deletedCart });
+    res.status(200).send({ status: true, message: "SUCCESS", data: deletedCart });
   } catch (error) {
     res.status(500).send({ status: false, message: error.message });
   }
@@ -358,6 +360,6 @@ const deleteCart = async (req, res) => {
 
 
 module.exports.createCart = createCart
-module.exports.updateCart=updateCart
-module.exports.getFromCart=getFromCart
-module.exports.deleteCart=deleteCart
+module.exports.updateCart = updateCart
+module.exports.getFromCart = getFromCart
+module.exports.deleteCart = deleteCart
