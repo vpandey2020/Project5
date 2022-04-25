@@ -26,7 +26,7 @@ let registerUser = async function (req, res) {
             res.status(400).send({ status: false, message: "please provide data " })
             return
         }
-        let { fname, lname, email, phone, password, address } = reqBody;
+        let { fname, lname, email, phone, password, address } = reqBody;  // distructing method 
 
 
 
@@ -263,7 +263,7 @@ const updateUser = async function (req, res) {
             }
         let findEmail = await userModel.findOne({ email });
         if (findEmail) {
-            res.status(400).send({ status: false, message: "Email is already updated " })
+            res.status(400).send({ status: false, message: "Email is already registered  " })
             return
         }
 
@@ -273,7 +273,7 @@ const updateUser = async function (req, res) {
             }
         let findPhone = await userModel.findOne({ phone });
         if (findPhone) {
-            res.status(400).send({ status: false, message: "Phone is already updated " })
+            res.status(400).send({ status: false, message: "Phone is already registered " })
             return
         }
         //validation for password
@@ -281,7 +281,7 @@ const updateUser = async function (req, res) {
             return res.status(400).send({ status: false, message: "password is required" })
         }
         if (!(/^.{8,15}$/.test(password))) {
-            return res.status(400).send({ status: false, msg: "Invalid Password" })
+            return res.status(400).send({ status: false, msg: "Passowrd should not be less than min 8 and max 15 " })
         }
         var encryptedPassword = await bcrypt.hash(password, 10)
         if (profileImage && profileImage.length > 0) {
